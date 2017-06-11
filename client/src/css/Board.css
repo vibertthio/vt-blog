@@ -6,6 +6,36 @@ body {
 
 
 /****
+Nav
+****/
+.nav {
+  display: flex;
+}
+
+.nav .active {
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.nav li {
+  margin-right: 1.2em;
+}
+
+.nav a {
+  text-decoration: none;
+  font-size: 1.5em;
+  color: #d0021b;
+}
+
+.nav .nav-logo {
+  margin-right: 0.5em;
+  height: 1.5em;
+}
+
+/****
 Title
 ****/
 
@@ -53,9 +83,11 @@ Board
 .divider.rotate {
   /*transform: rotate(5deg);*/
 }
+
 /****
 Comment
 ****/
+
 .comment {
   margin-top: 5em;
 }
@@ -135,9 +167,11 @@ Comment Input
   transform: rotate(135deg) scale(1.3);
 }
 
+
 /****
 Reply
 ****/
+
 .reply {
   padding-left: 3em;
 }
