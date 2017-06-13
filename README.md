@@ -1,6 +1,8 @@
 # Vibert Thio's Mother Board
 
-This is actually a practice of React-Express structure.
+Simple blog based on React/Express/MongoDB.
+[demo](https://vt-blog.herokuapp.com/)
+
 
 ## Installation
 
