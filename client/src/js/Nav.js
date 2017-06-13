@@ -5,7 +5,7 @@ import logo from './../img/flash.png';
 import './../css/Nav.css';
 
 const Nav = () => {
-  console.log('blah');
+  console.log('navigating');
   return (
     <div>
       <ul className="nav">
@@ -22,8 +22,8 @@ const Nav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="active" to="/articles">
-            Articles
+          <NavLink activeClassName="active" to="/posts">
+            Posts
           </NavLink>
         </li>
         <li>

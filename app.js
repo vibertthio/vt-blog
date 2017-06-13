@@ -4,21 +4,16 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const router = require('./server/router');
+const mongoose = require('mongoose');
 
-// import express from 'express';
-// import path from 'path';
-// import logger from 'morgan';
-// import cookieParser from 'cookie-parser';
-// import bodyParser from 'body-parser';
-// import index from './routes/index';
-// import users from './routes/users';
-// import api from './routes/api';
+
 const app = express();
 
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
+if (process.env.NODE_ENV !== 'test') {
+  mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/vtblogdb');
+}
 
+mongoose.Promise = global.Promise;
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

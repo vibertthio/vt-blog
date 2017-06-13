@@ -18,14 +18,14 @@ const postSchema = new Schema({
   body: String,
   comments: [commentSchema],
   // tag: String,
-}, { collection: 'vtblogdb' });
+}, { collection: 'posts' });
 
 const Post = mongoose.model('Post', postSchema);
 
 const router = express.Router();
 
 router.get('/posts', (req, res) => {
-  Post.find()
+  Post.find().select('author title createdTime')
     .then((doc) => {
       console.log(doc);
       res.send(doc);
@@ -51,7 +51,10 @@ router.post('/posts', (req, res) => {
 });
 
 router.get('/post/:id', (req, res) => {
-
+  Post.findById(req.params.id, (err, doc) => {
+    if (err) throw err;
+    res.send(doc);
+  });
 });
 
 router.post('/post/:id', (req, res) => {
@@ -59,7 +62,10 @@ router.post('/post/:id', (req, res) => {
 });
 
 router.delete('/post/:id', (req, res) => {
-
+  Post.findByIdAndRemove(req.params.id, (err) => {
+    if (err) throw err;
+    res.send({ msg: 'post deleted' });
+  });
 });
 
 

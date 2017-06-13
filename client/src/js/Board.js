@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import './../css/Board.css';
 
 import CommentInput from './CommentInput';
-// import Title from './Title';
 import Comment from './Comment';
-
 
 // Tap event for mobile
 injectTapEventPlugin();
@@ -24,6 +24,7 @@ class Board extends Component {
   constructor() {
     super();
     this.state = {
+      posts: [],
       data: [],
       commentCount: 0,
       inputUserName: '',
@@ -37,19 +38,12 @@ class Board extends Component {
    * [componentDidMount description]
    */
   componentDidMount() {
-    fetch('/api')
+    fetch('/api/posts')
       .then(res => res.json())
-      .then((d) => {
-        const commentCount = d.length;
-        let data = d;
-        data = data.map((c) => {
-          const cNew = c;
-          cNew.replying = false;
-          cNew.replyingUserName = '';
-          cNew.replyingContent = '';
-          return cNew;
-        });
-        return this.setState({ data, commentCount });
+      .then((posts) => {
+        console.log(posts);
+        // posts.map(console.log);
+        return this.setState({ posts });
       })
       .catch(err => console.error(err));
   }
@@ -291,12 +285,28 @@ class Board extends Component {
         {/*
           <Title content="Mother Board" />
           <hr className="divider rotate" />
+          {this.board()}
+          {this.popAlert()}
         */}
-        {this.board()}
-        {this.popAlert()}
+        <ol className="posts">
+          {this.state.posts.map((post, index) =>
+            <li key={`post-${post.createdTime}`}>
+              <Link to={`${this.props.match.url}/${post._id}`}>
+                <h2>{post.title}</h2>
+              </Link>
+              <p>{post.createdTime}</p>
+            </li>,
+          )}
+        </ol>
       </div>
     );
   }
 }
+
+Board.propTypes = {
+  match: PropTypes.shape({
+    url: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default Board;

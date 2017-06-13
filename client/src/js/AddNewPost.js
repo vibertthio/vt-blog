@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import CommentInput from './CommentInput';
+import { Redirect } from 'react-router-dom';
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import StatefulEditor from './StatefulEditor';
 
 /**
  * [state description]
@@ -15,6 +18,7 @@ class AddNewPost extends Component {
     this.state = {
       title: '',
       body: '',
+      finishSending: false,
     };
   }
 
@@ -41,18 +45,70 @@ class AddNewPost extends Component {
   }
 
   /**
+   * [handleSendNewPost description]
+   */
+  handleSendNewPost() {
+    // const postSchema = new Schema({
+    //   author: String,
+    //   title: { type: String, required: true },
+    //   createdTime: Date,
+    //   // updatedTime:ㄚ Date,
+    //   body: String,
+    //   comments: [commentSchema],
+    //   // tag: String,
+    // }, { collection: 'vtblogdb' });
+
+    const author = 'Vibert Thio';
+    const createdTime = new Date();
+    const { title, body } = this.state;
+
+    fetch('/api/posts', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        author,
+        title,
+        createdTime,
+        body,
+      }),
+    })
+    .then(res => res.json())
+    .then((res) => {
+      console.log(res);
+      this.setState({
+        finishSending: true,
+      });
+    })
+    .catch(err => console.error(err));
+  }
+
+  /**
    * [render description]
    * @return {Element} [description]
    */
   render() {
     return (
-      <CommentInput
-        userName={this.state.title}
-        comment={this.state.body}
-        handleEditUserName={input => this.handleEditTitle(input)}
-        handleEditComment={input => this.handleEditBody(input)}
-        handleSend={console.log}
-      />
+      <div>
+        <TextField
+          onChange={e => this.handleEditTitle(e.target.value)}
+          className="title-input"
+          floatingLabelText="Title"
+          value={this.state.userName}
+        /><br />
+        <StatefulEditor onChange={input => this.handleEditBody(input)} />
+        <FlatButton
+          className="send-btn"
+          label="Send"
+          primary
+          onTouchTap={() => this.handleSendNewPost()}
+        />
+        {!this.state.finishSending ? null : (
+          <Redirect to="/posts" />
+        )}
+      </div>
     );
   }
 }
