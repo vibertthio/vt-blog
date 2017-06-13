@@ -3,5 +3,7 @@
 Icon?
 ._*
 
+npm-debug.log
+
 # dependencies
 /node_modules

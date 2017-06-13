@@ -5,7 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import './../css/Board.css';
 
 import CommentInput from './CommentInput';
-import Title from './Title';
+// import Title from './Title';
 import Comment from './Comment';
 
 
@@ -288,8 +288,10 @@ class Board extends Component {
   render() {
     return (
       <div className="App">
-        <Title content="Mother Board" />
-        <hr className="divider rotate" />
+        {/*
+          <Title content="Mother Board" />
+          <hr className="divider rotate" />
+        */}
         {this.board()}
         {this.popAlert()}
       </div>

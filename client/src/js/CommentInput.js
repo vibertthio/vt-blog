@@ -53,12 +53,14 @@ CommentInput.propTypes = {
   handleEditUserName: PropTypes.func.isRequired,
   handleEditComment: PropTypes.func.isRequired,
   handleSend: PropTypes.func.isRequired,
-  popAlertDialog: PropTypes.func.isRequired,
+  popAlertDialog: PropTypes.func,
 };
 
+const noop = () => {};
 CommentInput.defaultProps = {
   userName: '',
   comment: '',
+  popAlertDialog: noop,
 };
 
 export default CommentInput;

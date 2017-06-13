@@ -1,39 +1,11 @@
 body {
   margin: 0.5em;
   padding: 1em;
-  font-family: sans-serif;
+  /*font-family: sans-serif;*/
+  font-family: helvetica;
 }
 
 
-/****
-Nav
-****/
-.nav {
-  display: flex;
-}
-
-.nav .active {
-  font-weight: bold;
-}
-
-ul {
-  list-style-type: none;
-}
-
-.nav li {
-  margin-right: 1.2em;
-}
-
-.nav a {
-  text-decoration: none;
-  font-size: 1.5em;
-  color: #d0021b;
-}
-
-.nav .nav-logo {
-  margin-right: 0.5em;
-  height: 1.5em;
-}
 
 /****
 Title
@@ -75,9 +47,11 @@ Board
 
 
 .divider {
-  margin-top: 6em;
+  position: absolute;
   opacity: 0.4;
-  position: relative;
+  margin: 0px -25px 40px;
+  border-top: 1px solid #c9c7c7;
+  width: 100%;
 }
 
 .divider.rotate {
