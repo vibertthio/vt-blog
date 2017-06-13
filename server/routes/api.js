@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-mongoose.connect('localhost:27017/vtblogdb');
+// mongoose.connect('localhost:27017/vtblogdb');
 const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
